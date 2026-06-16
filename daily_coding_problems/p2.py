@@ -11,13 +11,21 @@ def brute_force(nums):
 
 def division(nums):
     prod = 1
-    for num in nums:
-        prod *= num
+    zero_ind  = -1
+    for i, num in enumerate(nums):
+        if num == 0:
+            if zero_ind != -1:
+                return [0] * len(nums)
+            zero_ind = i
+        else:
+            prod *= num
+
+    if zero_ind != -1:
+        return [0] * zero_ind + [prod] + [0] * (len(nums) - 1 - zero_ind)
 
     prods = []
     for num in nums:
-        prods.append(0 if num == 0 else prod / num)
-
+        prods.append(prod // num)
     return prods
 
 
