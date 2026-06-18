@@ -25,6 +25,7 @@ def first_missing(nums):
     for i, num in enumerate(nums):
         if num == 0:
             return i + 1
+
     return n
 
 print (first_missing([3, 4, -1, 1]))
