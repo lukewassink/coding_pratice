@@ -25,26 +25,17 @@ class XORLinkedList {
   public:
 
   void add(V val) {
-    if (end != nullptr)
-      cout << "\nend.val: " << end->val;
-    Node<V> n(val);
+    Node<V>* n = new Node<V>(val);
     length++;
     if (begin == nullptr) {
-      begin = &n;
-      end = &n;
-      cout << "\nHi!";
+      begin = n;
+      end = n;
       return;
     }
 
-    cout << "\nn.val: " << n.val;
-
-    cout << "\nend->both: " << end->both;
-    end->both = end->both ^ reinterpret_cast<uintptr_t>(&n);
-    cout << "\nupdated end->both: " << end->both;
-    n.both = reinterpret_cast<uintptr_t>(end);
-    cout << "\nn.both: " << n.both;
-    end = &n;
-    cout << "\nreassigned end->both: " << end->both;
+    end->both = end->both ^ reinterpret_cast<uintptr_t>(n);
+    n->both = reinterpret_cast<uintptr_t>(end);
+    end = n;
   }
 
   Node<V>* get(int i) {
@@ -71,6 +62,6 @@ int main() {
   cout << "\nOne: " << l.get(0)->val;
   cout << "\nTwo: " << l.get(1)->val;
   cout << "\nThree: " << l.get(2)->val;
-  cout << "\nToo big: " << l.get(3)->val;
+  cout << "\nToo big: " << (l.get(3) == nullptr);
   return 0;
 }
