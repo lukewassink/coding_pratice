@@ -49,3 +49,27 @@ print(num_x(4, [1, 2]))
 print(num_x(3, [1, 2, 3]))
 print(num_x(3, [2, 3]))
 
+
+# Really we should use DP for this. Let's do that.
+
+def num_x_with_cache(n, X, cache):
+    if n < 0: return 0
+    if n < len(cache): return cache[n]
+
+    return reduce(lambda x, y: x + num_x(n - y, X), X, 0)
+
+def num_x_dp(n, X):
+    if not X: return 0
+    cache = [1]
+
+    for i in range(1, n + 1):
+        cache.append(num_x_with_cache(i, X, cache))
+
+    return cache[n]
+
+print("DP version:")
+print(num_x_dp(10, []))
+print(num_x_dp(1, [2]))
+print(num_x_dp(4, [1, 2]))
+print(num_x_dp(3, [1, 2, 3]))
+print(num_x_dp(3, [2, 3]))
