@@ -11,7 +11,7 @@ def monte_carlo_pi(rounds):
     for _ in range(rounds):
         x = random.uniform(0, 1)
         y = random.uniform(0, 1)
-        if (x*x + y*y) < 1: circle_hits += 1
+        if (x*x + y*y) <= 1: circle_hits += 1
 
     return 4 * circle_hits / rounds
 
